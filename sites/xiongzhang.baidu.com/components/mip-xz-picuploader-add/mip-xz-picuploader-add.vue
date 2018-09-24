@@ -5,8 +5,11 @@
         ref="input"
         class="select-file-input"
         @change="selectFile">
-    <div class="add-btn" @click="handleAdd">
-        <p>上传最多10张照片</p>
+    <div 
+      class="add-btn"
+      :class="max == 1 ? 'add-btn-center' : ''"
+      @click="handleAdd">
+      <p v-if="max !== 1">上传最多{{max}}张照片</p>
     </div>
   </div>
 </template>
@@ -27,6 +30,9 @@
   background: url(./add.svg) no-repeat center 24px;
   background-size: 24px 24px;
 }
+.add-btn-center {
+  background-position: center;
+}
 .add-btn p {
   color: #c7c7c7;
   font-size: 10px;
@@ -39,6 +45,12 @@
 
 <script>
 export default {
+  props: {
+    max: {
+      type: Number,
+      default: 10
+    }
+  },
   mounted () {
     console.log('This is my first custom component !')
   },

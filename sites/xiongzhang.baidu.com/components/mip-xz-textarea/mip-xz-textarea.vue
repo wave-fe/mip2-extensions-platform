@@ -1,10 +1,15 @@
 <template>
-  <div class="multi-line-wrapper">
-    <textarea
-      :placeholder="placeholder"
-      v-model="value">
-    </textarea>
-    <div class="warning">{{warningText}}</div>
+  <div class="textarea-wrapper">
+    <div class="multi-line-wrapper">
+      <textarea
+        @blur="handleBlur"
+        @input="handleInput"
+        :placeholder="placeholder"
+        v-model="value">
+      </textarea>
+      <div class="count">{{countText}}</div>
+    </div>
+  <div class="warning" v-if="showWarning && warningText">{{warningText}}</div>
   </div>
 </template>
 
@@ -15,6 +20,7 @@
 .multi-line-wrapper textarea {
   padding: 6px 8px;
   outline: none;
+  border: none;
   resize: none;
   font-size: 14px;
   width: 100%;
@@ -24,11 +30,17 @@
 .multi-line-wrapper textarea::-webkit-input-placeholder {
   color: #999;
 }
-.warning {
+.count {
   text-align: right;
   padding: 5px 10px;
   font-size: 10px;
   color: #999;
+}
+.warning {
+  text-align: left;
+  padding: 5px 10px;
+  color: #d00000;
+  font-size: 10px;
 }
 </style>
 
@@ -37,6 +49,7 @@ export default {
   props: {
     isValid: Boolean,
     placeholder: String,
+    showWarning: Boolean,
     max: {
       type: Number,
       default: 2000
@@ -50,24 +63,27 @@ export default {
   mounted () {
   },
   computed: {
+    countText() {
+      return this.value.length + ' / ' + this.max;
+    },
     warningText() {
-      let validText = this.getValidText();
-      if (validText) {
-        return validText;
+      if (!this.value) {
+          return '请填写内容，不能为空'
       }
-      else {
-        return this.value.length + ' / ' + this.max;
-      }
-    }
-  },
-  methods: {
-    getValidText() {
-      if (this.value && this.value.length < this.min) {
+      else if (this.value && this.value.length < this.min) {
           return '最少' + this.min + '个字，已输入' + this.value.length + '个字';
       }
       else if (this.value.length > this.max) {
           return '最多' + this.max + '个字，已输入' + this.value.length + '个字'
       }
+    }
+  },
+  methods: {
+    handleBlur() {
+      this.showWarning = true;
+    },
+    handleInput() {
+      this.showWarning = false;
     }
   }
 }

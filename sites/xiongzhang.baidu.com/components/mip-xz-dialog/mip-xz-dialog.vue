@@ -19,13 +19,13 @@
 <style>
 .dialog-wrapper {
   position: fixed;
+  z-index: 9999;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   height: 100%;
-  background-color: #000;
-  opacity: 0.65;
+  background-color: rgba(0, 0, 0, 0.65);
 }
 .dialog-body {
   max-width: 100%;
@@ -56,6 +56,10 @@
   font-size: 18px;
   padding: 10px 37px 13px 37px;
   color: #000;
+  border-right: solid 1px #e0e0e0;
+}
+.dialog-button:last-child {
+  border-right: none;
 }
 </style>
 

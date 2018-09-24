@@ -1,11 +1,19 @@
 <template>
   <div class="wrapper">
     <mip-xz-picuploader
+      :max="1"
       url="/mock/opensc/comment/Image.json"
-      v-model="hello"
-      @input="handleUpload">
+      v-model="IDUp"
+      @input="handleUploadUp">
+    </mip-xz-picuploader>
+    <mip-xz-picuploader
+      :max="1"
+      url="/mock/opensc/comment/Image.json"
+      v-model="IDDown"
+      @input="handleUploadDown">
     </mip-xz-picuploader>
     <mip-xz-textarea
+      :showWarning.sync="showWarning"
       placeholder="详细描述交易过程，最少100字"
       max="2000"
       min="100"
@@ -35,6 +43,7 @@ import mipXzDialog from '../mip-xz-dialog/mip-xz-dialog';
 export default {
   data() {
     return {
+      showWarning: false,
       showDialog: false,
       buttons: [{
         id: 'ok',
@@ -43,7 +52,8 @@ export default {
         id: 'cancel',
         text: '取消'
       }],
-      hello: [],
+      IDUp: [],
+      IDDown: [],
       text: ''
     };
   },
@@ -62,7 +72,10 @@ export default {
     handleButton(id) {
       console.log(id, ' clicked');
     },
-    handleUpload(files) {
+    handleUploadUp(files) {
+        console.log(files);
+    },
+    handleUploadDown(files) {
         console.log(files);
     }
   }

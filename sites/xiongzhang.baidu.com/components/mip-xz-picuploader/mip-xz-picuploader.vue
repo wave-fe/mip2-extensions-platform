@@ -9,7 +9,7 @@
         @del="del">
       </mip-xz-picuploader-item>
     </div>
-    <mip-xz-picuploader-add v-if="value.length < 10" @fileselected="fileselected">
+    <mip-xz-picuploader-add v-if="value.length < max" :max="max" @fileselected="fileselected">
     </mip-xz-picuploader-add>
   </div>
 </template>
@@ -27,6 +27,10 @@ import mipXzPicuploaderItem from '../mip-xz-picuploader-item/mip-xz-picuploader-
 import mipXzPicuploaderAdd from '../mip-xz-picuploader-add/mip-xz-picuploader-add';
 export default {
   props: {
+    max: {
+      type: Number,
+      default: 10
+    },
     value: {
       type: Array,
       default: []
