@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html mip>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>MIP page</title>
+    <link rel="canonical" href="对应的原页面地址">
+    <link rel="stylesheet" href="https://c.mipcdn.com/static/v2/mip.css">
+    <style mip-custom>
+    /* 自定义样式 */
+    </style>
+  </head>
+  <body>
+    <mip-data>
+      <script type="application/json">
+        {
+          toastTip: ''
+        }
+      </script>
+    </mip-data>
+    <div>
+      <mip-xz-demo on="validate:valToast.show"></mip-xz-demo>
+      <mip-toast id= "valToast" m-bind:info-text="toastTip" station="center" auto-close="true"></mip-toast>
+    </div>
+    <script src="https://c.mipcdn.com/static/v2/mip.js"></script>
+    <script src="https://c.mipcdn.com/static/v2/mip-toast/mip-toast.js"></script>
+    <script src="/mip-xz-demo/mip-xz-demo.js"></script>
+  </body>
+</html>
